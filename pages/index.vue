@@ -61,7 +61,7 @@
             :key="aMoon.moon"
             text
             color="secondary"
-            @click="filterByName = aMoon.moon"
+            @click="filterByName = aMoon.moon ; filterByType = 'none'"
           >
             {{ aMoon.moon }}
           </v-btn>
