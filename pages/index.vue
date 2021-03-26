@@ -3,11 +3,23 @@
     <v-row id="filters" justify="center" class="px-1">
       <!-- May replace  search-input.sync  by  v-model  for performance issues. -->
       <v-combobox
-        :search-input.sync="theFilter"
+        class="mx-4"
+        style="max-width: 250px"
+        :search-input.sync="filterByName"
         :items="allLuminariesNames"
         clearable
-        label="Nom"
       />
+      <v-row no-gutters align="center" class="mx-4">
+        Type :
+        <v-btn
+          text
+          class="pa-0"
+          :color="filterByType != 'none' ? 'primary' : ''"
+          @click="changeTypeFilter()"
+        >
+          {{ filterByType }}
+        </v-btn>
+      </v-row>
     </v-row>
 
     <v-row no-gutters justify="center">
@@ -49,7 +61,7 @@
             :key="aMoon.moon"
             text
             color="secondary"
-            @click="theFilter = aMoon.moon"
+            @click="filterByName = aMoon.moon"
           >
             {{ aMoon.moon }}
           </v-btn>
@@ -76,7 +88,12 @@ export default {
         }}
      */
       luminaries: [],
-      theFilter: "",
+
+      filterByName: "",
+      /**
+       * @type {"planet" | "other" | "none"}
+       */
+      filterByType: "none",
     };
   },
   computed: {
@@ -86,11 +103,19 @@ export default {
       return ret;
     },
     filteredLuminaries() {
-      return this.theFilter
-        ? this.luminaries.filter((element) =>
-            element.name.toLowerCase().includes(this.theFilter.toLowerCase())
-          )
-        : this.luminaries;
+      let ret = this.luminaries.slice();
+
+      if (this.filterByName)
+        ret = ret.filter((element) =>
+          element.name.toLowerCase().includes(this.filterByName.toLowerCase())
+        );
+
+      if (this.filterByType == "planet")
+        ret = ret.filter((element) => element.isPlanet);
+      else if (this.filterByType == "other")
+        ret = ret.filter((element) => element.isPlanet === false);
+
+      return ret;
     },
   },
   mounted() {
@@ -111,6 +136,24 @@ export default {
         });
         console.log(ret);
       });
+  },
+  methods: {
+    changeTypeFilter() {
+      switch (this.filterByType) {
+        case "none":
+          this.filterByType = "planet";
+          break;
+        case "planet":
+          this.filterByType = "other";
+          break;
+        case "other":
+          this.filterByType = "none";
+          break;
+
+        default:
+          break;
+      }
+    },
   },
 };
 </script>
