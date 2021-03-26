@@ -49,6 +49,7 @@
             :key="aMoon.moon"
             text
             color="secondary"
+            @click="theFilter = aMoon.moon"
           >
             {{ aMoon.moon }}
           </v-btn>
