@@ -7,7 +7,7 @@
       <v-spacer />
     </v-app-bar>
     <v-main>
-      <v-container fluid>
+      <v-container fluid class="pa-0">
         <nuxt />
       </v-container>
     </v-main>

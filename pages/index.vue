@@ -1,14 +1,12 @@
 <template>
   <v-container fluid>
-    <v-row id="filters" justify="center">
-      {{ theFilterValue }}
-      <v-autocomplete
-        v-model="theFilterModel"
-        :search-input.sync="theFilterValue"
+    <v-row id="filters" justify="center" class="px-1">
+      <!-- May replace  search-input.sync  by  v-model  for performance issues. -->
+      <v-combobox
+        :search-input.sync="theFilter"
         :items="allLuminariesNames"
-        outlined
+        clearable
         label="Nom"
-        @blur="theFilterModel = theFilterValue.toString()"
       />
     </v-row>
 
@@ -17,7 +15,11 @@
         class="mx-2 my-4 pa-2"
         v-for="aLuminary in filteredLuminaries"
         :key="aLuminary.id"
-        style="min-width: 250px; max-width: 500px"
+        :style="
+          $vuetify.breakpoint.name == 'xs'
+            ? 'min-width: 150px;'
+            : 'min-width: 250px; max-width: 500px'
+        "
       >
         <v-row id="luminary-header" class="mx-0" no-gutters>
           <v-row no-gutters>
@@ -26,7 +28,7 @@
             </v-card-title>
           </v-row>
           <v-row no-gutters justify="end" class="mr-4">
-            <v-icon :color="aLuminary.isPlanet == true ? 'green' : 'grey'"
+            <v-icon :color="aLuminary.isPlanet == true ? 'primary' : 'grey'"
               >mdi-earth</v-icon
             >
           </v-row>
@@ -46,7 +48,7 @@
             v-for="aMoon in aLuminary.moons"
             :key="aMoon.moon"
             text
-            color="light-green"
+            color="secondary"
           >
             {{ aMoon.moon }}
           </v-btn>
@@ -73,20 +75,22 @@ export default {
         }}
      */
       luminaries: [],
-      theFilterModel: "",
-      theFilterValue: "",
+      theFilter: "",
     };
   },
   computed: {
     allLuminariesNames() {
-      let ret = []; 
-      this.luminaries.forEach((element)=> ret.push(element.name));
-      return ret ; 
+      let ret = [];
+      this.luminaries.forEach((element) => ret.push(element.name));
+      return ret;
     },
     filteredLuminaries() {
-
-      return this.theFilterValue ? this.luminaries.filter((element)=> element.name.toLowerCase().includes(this.theFilterValue.toLowerCase()) ) : this.luminaries;
-    }
+      return this.theFilter
+        ? this.luminaries.filter((element) =>
+            element.name.toLowerCase().includes(this.theFilter.toLowerCase())
+          )
+        : this.luminaries;
+    },
   },
   mounted() {
     this.$content("local_api_data")
@@ -114,5 +118,11 @@ export default {
 .noLink {
   text-decoration: inherit !important;
   color: inherit !important;
+}
+
+/* Be careful to CSS scope */
+.theme--dark.v-list {
+  background: rgb(30 30 30 / 95%);
+  color: #ffffff;
 }
 </style>
