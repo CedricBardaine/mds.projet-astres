@@ -67,8 +67,8 @@
           </v-row>
         </v-row>
 
-        <v-row v-if="anAstralBody.discoveredBy" no-gutters align="center">
-          <v-row no-gutters>
+        <v-row no-gutters justify="end" align="center">
+          <v-row no-gutters v-if="anAstralBody.discoveredBy">
             <small style="max-width: 250px">
               Découverte par
               <b>
