@@ -1,6 +1,11 @@
 <template>
+  <!-- 
+  Awfully readable, this template only displays $route params passed from $router 
+  and verifies if a param isn't null before displaying the corresponding div. 
+  -->
   <v-container>
-      <br>
+    <br />
+
     <v-row justify="center">
       <h1>
         {{ $route.params.name }}
@@ -9,6 +14,7 @@
     <v-row v-if="$route.params.isPlanet" justify="center">
       <small>(planète)</small>
       <br />
+
     </v-row>
     <v-row justify="center">
       <small v-if="$route.params.discoveredBy">
@@ -20,7 +26,9 @@
       </small>
     </v-row>
     <br />
+
     <br />
+
     <v-container>
       <v-row
         no-gutters
@@ -43,6 +51,7 @@
       </v-row>
       <br />
 
+
       <v-row
         no-gutters
         v-if="
@@ -64,6 +73,7 @@
       </v-row>
       <br />
 
+
       <v-row no-gutters v-if="$route.params.density">
         <v-row no-gutters justify="end" style="width: 45%"> Densité </v-row>
         <v-row
@@ -76,6 +86,7 @@
         </v-row>
       </v-row>
       <br />
+
 
       <v-row no-gutters v-if="$route.params.gravity">
         <v-row no-gutters justify="end" style="width: 45%"> Gravité </v-row>
@@ -90,6 +101,7 @@
       </v-row>
       <br />
 
+
       <v-row no-gutters v-if="$route.params.inclination">
         <v-row no-gutters justify="end" style="width: 45%"> Inclinaison </v-row>
         <v-row
@@ -103,6 +115,7 @@
       </v-row>
       <br />
 
+
       <v-row no-gutters v-if="$route.params.meanRadius">
         <v-row no-gutters justify="end" style="width: 45%"> Rayon moyen </v-row>
         <v-row
@@ -115,6 +128,7 @@
         </v-row>
       </v-row>
       <br />
+
 
       <v-row no-gutters v-if="$route.params.equaRadius">
         <v-row no-gutters justify="end" style="width: 45%">
@@ -131,6 +145,7 @@
       </v-row>
       <br />
 
+
       <v-row no-gutters v-if="$route.params.polarRadius">
         <v-row no-gutters justify="end" style="width: 45%">
           Rayon polaire
@@ -145,6 +160,7 @@
         </v-row>
       </v-row>
       <br />
+
 
       <v-row no-gutters v-if="$route.params.sideralOrbit">
         <v-row no-gutters justify="end" style="width: 45%">
@@ -161,6 +177,7 @@
       </v-row>
       <br />
 
+
       <v-row no-gutters v-if="$route.params.sideralRotation">
         <v-row no-gutters justify="end" style="width: 45%">
           Rotation complète
@@ -175,9 +192,12 @@
         </v-row>
       </v-row>
       <br />
+
+
       <br />
 
-      <!-- Almost the same as in index.vue -->
+
+      <!-- Redirect to index but with the name of the moon in the name filter. - - - - - - - - - - -->
       <v-row id="" class="mx-2" no-gutters justify="center">
         <v-btn
           v-for="aMoon in $route.params.moons"
@@ -191,26 +211,23 @@
           {{ aMoon.moon }}
         </v-btn>
       </v-row>
+      <!-- - - - - - - - - - - Redirect to index but with the name of the moon in the name filter. -->
     </v-container>
   </v-container>
 </template>
 
 <script>
-export default {
-  mounted() {
-    /*
-    this.$route.params : {
-        discoveredBy: "Asaph Hall"
-        id: "deimos"
-        isPlanet: false
-        moons: null
-        name: "Deïmos"
-        rel: "https://api.le-systeme-solaire.net/rest/bodies/deimos"
-    }
-    */
-    console.log(this.$route);
-  },
-};
+/*
+  this.$route.params : {
+      discoveredBy: "Asaph Hall"
+      id: "deimos"
+      isPlanet: false
+      moons: null
+      name: "Deïmos"
+      rel: "https://api.le-systeme-solaire.net/rest/bodies/deimos"
+  }
+*/
+export default {};
 </script>
 
 <style>

@@ -1,5 +1,6 @@
 <template>
   <v-container fluid>
+    <!-- Filters div - - - - - - - - - - -->
     <v-row no-gutters id="filters" justify="start" align="center" class="pl-1">
       <!-- May replace  search-input.sync  by  v-model  for performance issues. -->
       <v-combobox
@@ -35,7 +36,9 @@
         >mdi-star</v-icon
       >
     </v-row>
+    <!-- - - - - - - - - - - Filters div -->
 
+    <!-- The luminaries list - - - - - - - - - - -->
     <v-row no-gutters justify="center">
       <v-card
         class="mx-2 my-4 pa-2"
@@ -78,6 +81,8 @@
               </b>
             </small>
           </v-row>
+
+          <!-- The favorite star icon  &  the fired notification - - - - - - - - - - -->
           <v-row no-gutters style="display: contents">
             <v-icon
               class="ma-4 mr-4 linkHover"
@@ -105,6 +110,7 @@
           >
             Ajouté aux favoris 💫
           </v-snackbar>
+          <!-- - - - - - - - - - - The favorite star icon  &  the fired notification -->
         </v-row>
 
         <v-row id="" class="mx-2" no-gutters>
@@ -120,6 +126,7 @@
         </v-row>
       </v-card>
     </v-row>
+    <!-- - - - - - - - - - - The luminaries list -->
   </v-container>
 </template>
 
@@ -129,16 +136,17 @@ export default {
   data() {
     return {
       /**
-       * TODO: ajouter d'autres valeurs à mettre dans détails. 
-     * @type {{
-        id: String, 
-        name: String, 
-        isPlanet: boolean, 
-        moons: Array|null, 
-        discoveredBy: String, 
-        rel: String,
-        }}
-     */
+       * @type {{
+           id: String, 
+           name: String, 
+           isPlanet: boolean, 
+           moons: Array|null, 
+           discoveredBy: String, 
+           rel: String,
+
+           AND_MORE
+          }}
+      */
       luminaries: [],
 
       filterByName: "",
@@ -153,11 +161,15 @@ export default {
     };
   },
   computed: {
+    /**
+     * Used for the combobox.
+     */
     allLuminariesNames() {
       let ret = [];
       this.luminaries.forEach((element) => ret.push(element.name));
       return ret;
     },
+
     filteredLuminaries() {
       let ret = this.luminaries.slice();
 
@@ -182,6 +194,7 @@ export default {
     },
   },
   mounted() {
+    // Retrieves data not from a distant API but from the $content.
     this.$content("local_api_data")
       .fetch()
       .then((rep) => {
@@ -233,6 +246,7 @@ export default {
           break;
       }
     },
+
     filterByMoonName(name) {
       this.filterByName = name;
       this.filterByType = "none";
