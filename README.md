@@ -1,6 +1,8 @@
 # mds.projet-astres
 
-## Détails du projet
+Front app to visualise astral bodies data from https://api.le-systeme-solaire.net/rest/bodies/ (integrated as Nuxt $content). 
+
+## Détails du projet (fr)
 ### Contexte du projet
 Afin de pouvoir évaluer vos niveau d’acquisition de savoirs, il vous est demandé de réaliser une application front end en lien avec le système solaire.
 S’agissant essentiellement d’une application à destination pédagogique, il n’y aura nul besoin d’avoir de gestion de compte utilisateur et l’application ne fonctionnera que avec de la lecture de data issue d’une API. 
@@ -22,7 +24,7 @@ Il n’est pas attendu de réaliser une application backend.
   --> les favoris sont affichés sur la même page. 
 
 
-## Lancer en localhost 
+## Run on localhost 
 
 `npm i && npm run dev` 
 
