@@ -6,7 +6,7 @@
       <v-combobox
         style="max-width: 250px"
         :search-input.sync="filterByName"
-        :items="allLuminariesNames"
+        :items="allAstralBodiesNames"
         clearable
       />
 
@@ -38,46 +38,41 @@
     </v-row>
     <!-- - - - - - - - - - - Filters div -->
 
-    <!-- The luminaries list - - - - - - - - - - -->
+    <!-- The astralBodies list - - - - - - - - - - -->
     <v-row no-gutters justify="center">
       <v-card
         class="mx-2 my-4 pa-2"
-        v-for="aLuminary in filteredLuminaries"
-        :key="aLuminary.id"
+        v-for="anAstralBody in filteredAstralBodies"
+        :key="anAstralBody.id"
         :style="
           $vuetify.breakpoint.name == 'xs'
             ? 'min-width: 150px;'
             : 'min-width: 250px; max-width: 500px'
         "
       >
-        <v-row id="luminary-header" class="mx-0" no-gutters>
+        <v-row id="astralBody-header" class="mx-0" no-gutters>
           <v-row no-gutters>
             <v-card-title
               primary-title
               class="linkHover"
-              @click="$router.push({ name: 'details', params: aLuminary })"
+              @click="$router.push({ name: 'details', params: anAstralBody })"
             >
-              {{ aLuminary.name }}
+              {{ anAstralBody.name }}
             </v-card-title>
           </v-row>
           <v-row no-gutters justify="end" class="mr-4">
-            <v-icon :color="aLuminary.isPlanet == true ? 'primary' : 'grey'"
+            <v-icon :color="anAstralBody.isPlanet == true ? 'primary' : 'grey'"
               >mdi-earth</v-icon
             >
           </v-row>
         </v-row>
 
-        <v-row
-          id="luminary-founded"
-          v-if="aLuminary.discoveredBy"
-          no-gutters
-          align="center"
-        >
+        <v-row v-if="anAstralBody.discoveredBy" no-gutters align="center">
           <v-row no-gutters>
             <small style="max-width: 250px">
               Découverte par
               <b>
-                {{ aLuminary.discoveredBy }}
+                {{ anAstralBody.discoveredBy }}
               </b>
             </small>
           </v-row>
@@ -88,15 +83,15 @@
               class="ma-4 mr-4 linkHover"
               @click="
                 /* Fires a notification */
-                $store.state.favorites.includes(aLuminary.id)
+                $store.state.favorites.includes(anAstralBody.id)
                   ? ''
                   : (snackbarModel = true);
 
                 /* Modify favorites list */
-                $store.commit('favorites/toggle', aLuminary.id);
+                $store.commit('favorites/toggle', anAstralBody.id);
               "
               :color="
-                $store.state.favorites.includes(aLuminary.id) ? 'yellow' : ''
+                $store.state.favorites.includes(anAstralBody.id) ? 'yellow' : ''
               "
               >mdi-star</v-icon
             >
@@ -115,7 +110,7 @@
 
         <v-row id="" class="mx-2" no-gutters>
           <v-btn
-            v-for="aMoon in aLuminary.moons"
+            v-for="aMoon in anAstralBody.moons"
             :key="aMoon.moon"
             text
             color="secondary"
@@ -126,7 +121,7 @@
         </v-row>
       </v-card>
     </v-row>
-    <!-- - - - - - - - - - - The luminaries list -->
+    <!-- - - - - - - - - - - The astralBodies list -->
   </v-container>
 </template>
 
@@ -147,7 +142,7 @@ export default {
            AND_MORE
           }}
       */
-      luminaries: [],
+      astralBodies: [],
 
       filterByName: "",
       /**
@@ -164,14 +159,14 @@ export default {
     /**
      * Used for the combobox.
      */
-    allLuminariesNames() {
+    allAstralBodiesNames() {
       let ret = [];
-      this.luminaries.forEach((element) => ret.push(element.name));
+      this.astralBodies.forEach((element) => ret.push(element.name));
       return ret;
     },
 
-    filteredLuminaries() {
-      let ret = this.luminaries.slice();
+    filteredAstralBodies() {
+      let ret = this.astralBodies.slice();
 
       if (this.filterByName)
         ret = ret.filter((element) =>
@@ -201,7 +196,7 @@ export default {
         let ret = "";
         rep.bodies.forEach((astralBody) => {
           ret += astralBody.id + " | ";
-          this.luminaries.push({
+          this.astralBodies.push({
             id: astralBody.id,
             name: astralBody.name,
             isPlanet: astralBody.isPlanet,

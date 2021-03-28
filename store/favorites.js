@@ -1,6 +1,6 @@
 export const state = () =>
     /**
-     * Represents the luminaries added to the favorites by the user. 
+     * Represents the astralBodies added to the favorites by the user. 
      * @type { string[] }
      */
     []
