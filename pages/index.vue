@@ -26,6 +26,14 @@
       <div style="width: 24px" />
 
       <v-checkbox label="Possède des lunes" v-model="filterHasMoons" />
+
+      <div style="width: 24px" />
+
+      <v-icon
+        :color="filterFavorites ? 'primary' : ''"
+        @click="filterFavorites = !filterFavorites"
+        >mdi-star</v-icon
+      >
     </v-row>
 
     <v-row no-gutters justify="center">
@@ -74,7 +82,13 @@
             <v-icon
               class="ma-4 mr-4 linkHover"
               @click="
-                  $store.commit('favorites/toggle', aLuminary.id)
+                /* Fires a notification */
+                $store.state.favorites.includes(aLuminary.id)
+                  ? ''
+                  : (snackbarModel = true);
+
+                /* Modify favorites list */
+                $store.commit('favorites/toggle', aLuminary.id);
               "
               :color="
                 $store.state.favorites.includes(aLuminary.id) ? 'yellow' : ''
@@ -82,8 +96,16 @@
               >mdi-star</v-icon
             >
           </v-row>
+          <v-snackbar
+            v-model="snackbarModel"
+            right
+            elevation="0"
+            text
+            color="yellow"
+          >
+            Ajouté aux favoris 💫
+          </v-snackbar>
         </v-row>
-
 
         <v-row id="" class="mx-2" no-gutters>
           <v-btn
@@ -125,6 +147,9 @@ export default {
        */
       filterByType: "none",
       filterHasMoons: false,
+      filterFavorites: false,
+
+      snackbarModel: false,
     };
   },
   computed: {
@@ -147,6 +172,11 @@ export default {
         ret = ret.filter((element) => element.isPlanet === false);
 
       if (this.filterHasMoons) ret = ret.filter((element) => element.moons);
+
+      if (this.filterFavorites)
+        ret = ret.filter((element) =>
+          this.$store.state.favorites.includes(element.id)
+        );
 
       return ret;
     },
