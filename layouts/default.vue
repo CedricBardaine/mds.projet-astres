@@ -2,7 +2,7 @@
   <v-app dark>
     <v-app-bar fixed app>
       <v-toolbar-title>
-        <NuxtLink to="/" class="noLink"> Astres.ced </NuxtLink>
+        <NuxtLink to="/" class="noLink linkHover"> Astres.ced </NuxtLink>
       </v-toolbar-title>
       <v-spacer />
     </v-app-bar>
@@ -25,3 +25,15 @@ export default {
   },
 };
 </script>
+
+<style>
+.noLink {
+  text-decoration: inherit !important;
+  color: inherit !important;
+}
+
+.linkHover:hover {
+  color: #8bc34a !important;
+  cursor: pointer;
+}
+</style>

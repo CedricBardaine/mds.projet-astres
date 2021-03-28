@@ -56,7 +56,7 @@ export default {
           // primary: colors.blue.darken2,
           // secondary: colors.amber.darken3,
           primary: colors.green,
-          secondary: colors.lightGreen,
+          secondary: colors.lightGreen, // #8BC34A
           accent: colors.grey.darken3,
           info: colors.teal.lighten1,
           warning: colors.amber.base,

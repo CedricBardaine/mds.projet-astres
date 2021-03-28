@@ -35,7 +35,11 @@
       >
         <v-row id="luminary-header" class="mx-0" no-gutters>
           <v-row no-gutters>
-            <v-card-title primary-title>
+            <v-card-title
+              primary-title
+              class="linkHover"
+              @click="$router.push({ name: 'details', params: aLuminary })"
+            >
               {{ aLuminary.name }}
             </v-card-title>
           </v-row>
@@ -61,7 +65,10 @@
             :key="aMoon.moon"
             text
             color="secondary"
-            @click="filterByName = aMoon.moon ; filterByType = 'none'"
+            @click="
+              filterByName = aMoon.moon;
+              filterByType = 'none';
+            "
           >
             {{ aMoon.moon }}
           </v-btn>
@@ -132,6 +139,19 @@ export default {
             moons: astralBody.moons,
             discoveredBy: astralBody.discoveredBy,
             rel: astralBody.rel,
+
+            // for details
+            inclination: astralBody.inclination, // °
+            mass: astralBody.mass, // mass: {massValue: 3.30114,  massExponent: 23}
+            vol: astralBody.vol, // vol: {volValue: 6.083, volExponent: 10}
+            density: astralBody.density, // g/cm³
+            gravity: astralBody.gravity, // m/s²
+            meanRadius: astralBody.meanRadius, // km
+            equaRadius: astralBody.equaRadius, // km
+            polarRadius: astralBody.polarRadius, //km
+            sideralOrbit: astralBody.sideralOrbit, // days
+            sideralRotation: astralBody.sideralRotation, // hrs
+            discoveryDate: astralBody.discoveryDate, // dd/mm/yyyy
           });
         });
         console.log(ret);
@@ -159,11 +179,6 @@ export default {
 </script>
 
 <style>
-.noLink {
-  text-decoration: inherit !important;
-  color: inherit !important;
-}
-
 /* Be careful to CSS scope */
 .theme--dark.v-list {
   background: rgb(30 30 30 / 95%);
