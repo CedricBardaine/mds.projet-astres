@@ -1,15 +1,17 @@
 <template>
   <v-container fluid>
-    <v-row id="filters" justify="center" class="px-1">
+    <v-row no-gutters id="filters" justify="start" align="center" class="pl-1">
       <!-- May replace  search-input.sync  by  v-model  for performance issues. -->
       <v-combobox
-        class="mx-4"
         style="max-width: 250px"
         :search-input.sync="filterByName"
         :items="allLuminariesNames"
         clearable
       />
-      <v-row no-gutters align="center" class="mx-4">
+
+      <div style="width: 24px" />
+
+      <div no-gutters align="center">
         Type :
         <v-btn
           text
@@ -19,7 +21,11 @@
         >
           {{ filterByType }}
         </v-btn>
-      </v-row>
+      </div>
+
+      <div style="width: 24px" />
+
+      <v-checkbox label="Possède des lunes" v-model="filterHasMoons" />
     </v-row>
 
     <v-row no-gutters justify="center">
@@ -98,6 +104,7 @@ export default {
        * @type {"planet" | "other" | "none"}
        */
       filterByType: "none",
+      filterHasMoons: false,
     };
   },
   computed: {
@@ -118,6 +125,9 @@ export default {
         ret = ret.filter((element) => element.isPlanet);
       else if (this.filterByType == "other")
         ret = ret.filter((element) => element.isPlanet === false);
+
+      if(this.filterHasMoons)
+        ret = ret.filter((element) => element.moons)
 
       return ret;
     },

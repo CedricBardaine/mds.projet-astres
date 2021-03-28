@@ -10,7 +10,7 @@ Il n’est pas attendu de réaliser une application backend.
 ### Résultats attendus
 - Liste des astres : Une page listant l’ensemble des astres doit être disponible avec les fonctionnalités suivantes
   - [x] Filtre sur des critères tels que si c’est une planète (isPlanet) ou non
-  - [ ] Filtre sur le fait d’avoir des lunes
+  - [x] Filtre sur le fait d’avoir des lunes
 - Page de l’astre
   - [x] L’ensemble des infomations liées à l’astre doivent être affichées au sein de cette page.
   - [x] Si l’astre est une planète, possédant des lunes, un accès rapide vers ses lunes doit être disponible.  
