@@ -36,6 +36,7 @@ export default {
   modules: [
     // https://go.nuxtjs.dev/pwa
     '@nuxtjs/pwa',
+    '@nuxt/content',
   ],
 
   // PWA module configuration: https://go.nuxtjs.dev/pwa
@@ -52,9 +53,11 @@ export default {
       dark: true,
       themes: {
         dark: {
-          primary: colors.blue.darken2,
+          // primary: colors.blue.darken2,
+          // secondary: colors.amber.darken3,
+          primary: colors.green,
+          secondary: colors.lightGreen,
           accent: colors.grey.darken3,
-          secondary: colors.amber.darken3,
           info: colors.teal.lighten1,
           warning: colors.amber.base,
           error: colors.deepOrange.accent4,
