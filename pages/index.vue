@@ -65,10 +65,7 @@
             :key="aMoon.moon"
             text
             color="secondary"
-            @click="
-              filterByName = aMoon.moon;
-              filterByType = 'none';
-            "
+            @click="filterByMoonName(aMoon.moon)"
           >
             {{ aMoon.moon }}
           </v-btn>
@@ -154,8 +151,11 @@ export default {
             discoveryDate: astralBody.discoveryDate, // dd/mm/yyyy
           });
         });
-        console.log(ret);
       });
+
+    // If the page is called from details it has a route param with a moon name, we then filter it automatically.
+    if (this.$route.params.moonName)
+      this.$nextTick(() => this.filterByMoonName(this.$route.params.moonName));
   },
   methods: {
     changeTypeFilter() {
@@ -173,6 +173,10 @@ export default {
         default:
           break;
       }
+    },
+    filterByMoonName(name) {
+      this.filterByName = name;
+      this.filterByType = "none";
     },
   },
 };

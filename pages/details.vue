@@ -1,5 +1,6 @@
 <template>
   <v-container>
+      <br>
     <v-row justify="center">
       <h1>
         {{ $route.params.name }}
@@ -174,6 +175,22 @@
         </v-row>
       </v-row>
       <br />
+      <br />
+
+      <!-- Almost the same as in index.vue -->
+      <v-row id="" class="mx-2" no-gutters justify="center">
+        <v-btn
+          v-for="aMoon in $route.params.moons"
+          :key="aMoon.moon"
+          text
+          color="secondary"
+          @click="
+            $router.push({ name: 'index', params: { moonName: aMoon.moon } })
+          "
+        >
+          {{ aMoon.moon }}
+        </v-btn>
+      </v-row>
     </v-container>
   </v-container>
 </template>

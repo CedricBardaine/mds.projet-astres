@@ -12,8 +12,9 @@ Il n’est pas attendu de réaliser une application backend.
   - [x] Filtre sur des critères tels que si c’est une planète (isPlanet) ou non
   - [ ] Filtre sur le fait d’avoir des lunes
 - Page de l’astre
-  - [ ] L’ensemble des infomations liées à l’astre doivent être affichées au sein de cette page.
-  - [ ] Si l’astre est une planète, possédant des lunes, un accès rapide vers ses lunes doit être disponible.
+  - [x] L’ensemble des infomations liées à l’astre doivent être affichées au sein de cette page.
+  - [x] Si l’astre est une planète, possédant des lunes, un accès rapide vers ses lunes doit être disponible.  
+  --> L'application fait juste un petit détour vers la page d'accueil car l'architechture de l'application fait que les données sont injectées dans la page d'accueil et les envoies à la page détails, mais les détails pour chaque lune ne le sont pas. 
 - Page des favoris
   - [ ] Il doit être possible de spécifier des astres en tant que favoris et de le retirer de la liste des favoris. 
   - [ ] Lorsque vous rajoutez un astre en favori, une notification doit apparaître pour vous le signaler.
