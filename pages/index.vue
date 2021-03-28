@@ -1,15 +1,17 @@
 <template>
   <v-container fluid>
-    <v-row id="filters" justify="center" class="px-1">
+    <v-row no-gutters id="filters" justify="start" align="center" class="pl-1">
       <!-- May replace  search-input.sync  by  v-model  for performance issues. -->
       <v-combobox
-        class="mx-4"
         style="max-width: 250px"
         :search-input.sync="filterByName"
         :items="allLuminariesNames"
         clearable
       />
-      <v-row no-gutters align="center" class="mx-4">
+
+      <div style="width: 24px" />
+
+      <div no-gutters align="center">
         Type :
         <v-btn
           text
@@ -19,7 +21,11 @@
         >
           {{ filterByType }}
         </v-btn>
-      </v-row>
+      </div>
+
+      <div style="width: 24px" />
+
+      <v-checkbox label="Possède des lunes" v-model="filterHasMoons" />
     </v-row>
 
     <v-row no-gutters justify="center">
@@ -35,7 +41,11 @@
       >
         <v-row id="luminary-header" class="mx-0" no-gutters>
           <v-row no-gutters>
-            <v-card-title primary-title>
+            <v-card-title
+              primary-title
+              class="linkHover"
+              @click="$router.push({ name: 'details', params: aLuminary })"
+            >
               {{ aLuminary.name }}
             </v-card-title>
           </v-row>
@@ -61,7 +71,7 @@
             :key="aMoon.moon"
             text
             color="secondary"
-            @click="filterByName = aMoon.moon ; filterByType = 'none'"
+            @click="filterByMoonName(aMoon.moon)"
           >
             {{ aMoon.moon }}
           </v-btn>
@@ -94,6 +104,7 @@ export default {
        * @type {"planet" | "other" | "none"}
        */
       filterByType: "none",
+      filterHasMoons: false,
     };
   },
   computed: {
@@ -115,6 +126,9 @@ export default {
       else if (this.filterByType == "other")
         ret = ret.filter((element) => element.isPlanet === false);
 
+      if(this.filterHasMoons)
+        ret = ret.filter((element) => element.moons)
+
       return ret;
     },
   },
@@ -132,10 +146,26 @@ export default {
             moons: astralBody.moons,
             discoveredBy: astralBody.discoveredBy,
             rel: astralBody.rel,
+
+            // for details
+            inclination: astralBody.inclination, // °
+            mass: astralBody.mass, // mass: {massValue: 3.30114,  massExponent: 23}
+            vol: astralBody.vol, // vol: {volValue: 6.083, volExponent: 10}
+            density: astralBody.density, // g/cm³
+            gravity: astralBody.gravity, // m/s²
+            meanRadius: astralBody.meanRadius, // km
+            equaRadius: astralBody.equaRadius, // km
+            polarRadius: astralBody.polarRadius, //km
+            sideralOrbit: astralBody.sideralOrbit, // days
+            sideralRotation: astralBody.sideralRotation, // hrs
+            discoveryDate: astralBody.discoveryDate, // dd/mm/yyyy
           });
         });
-        console.log(ret);
       });
+
+    // If the page is called from details it has a route param with a moon name, we then filter it automatically.
+    if (this.$route.params.moonName)
+      this.$nextTick(() => this.filterByMoonName(this.$route.params.moonName));
   },
   methods: {
     changeTypeFilter() {
@@ -154,16 +184,15 @@ export default {
           break;
       }
     },
+    filterByMoonName(name) {
+      this.filterByName = name;
+      this.filterByType = "none";
+    },
   },
 };
 </script>
 
 <style>
-.noLink {
-  text-decoration: inherit !important;
-  color: inherit !important;
-}
-
 /* Be careful to CSS scope */
 .theme--dark.v-list {
   background: rgb(30 30 30 / 95%);
