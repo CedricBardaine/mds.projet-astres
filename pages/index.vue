@@ -56,14 +56,34 @@
           </v-row>
         </v-row>
 
-        <v-row id="luminary-founded" v-if="aLuminary.discoveredBy" no-gutters>
-          <small style="max-width: 250px">
-            Découverte par
-            <b>
-              {{ aLuminary.discoveredBy }}
-            </b>
-          </small>
+        <v-row
+          id="luminary-founded"
+          v-if="aLuminary.discoveredBy"
+          no-gutters
+          align="center"
+        >
+          <v-row no-gutters>
+            <small style="max-width: 250px">
+              Découverte par
+              <b>
+                {{ aLuminary.discoveredBy }}
+              </b>
+            </small>
+          </v-row>
+          <v-row no-gutters style="display: contents">
+            <v-icon
+              class="ma-4 mr-4 linkHover"
+              @click="
+                  $store.commit('favorites/toggle', aLuminary.id)
+              "
+              :color="
+                $store.state.favorites.includes(aLuminary.id) ? 'yellow' : ''
+              "
+              >mdi-star</v-icon
+            >
+          </v-row>
         </v-row>
+
 
         <v-row id="" class="mx-2" no-gutters>
           <v-btn
@@ -126,8 +146,7 @@ export default {
       else if (this.filterByType == "other")
         ret = ret.filter((element) => element.isPlanet === false);
 
-      if(this.filterHasMoons)
-        ret = ret.filter((element) => element.moons)
+      if (this.filterHasMoons) ret = ret.filter((element) => element.moons);
 
       return ret;
     },
