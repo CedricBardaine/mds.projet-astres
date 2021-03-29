@@ -33,6 +33,7 @@
       <v-icon
         :color="filterFavorites ? 'primary' : ''"
         @click="filterFavorites = !filterFavorites"
+        v-tooltip="'Filtrer par favoris'"
         >mdi-star</v-icon
       >
     </v-row>
@@ -77,35 +78,7 @@
             </small>
           </v-row>
 
-          <!-- The favorite star icon  &  the fired notification - - - - - - - - - - -->
-          <v-row no-gutters style="display: contents">
-            <v-icon
-              class="ma-4 mr-4 linkHover"
-              @click="
-                /* Fires a notification */
-                $store.state.favorites.includes(anAstralBody.id)
-                  ? ''
-                  : (snackbarModel = true);
-
-                /* Modify favorites list */
-                $store.commit('favorites/toggle', anAstralBody.id);
-              "
-              :color="
-                $store.state.favorites.includes(anAstralBody.id) ? 'yellow' : ''
-              "
-              >mdi-star</v-icon
-            >
-          </v-row>
-          <v-snackbar
-            v-model="snackbarModel"
-            right
-            elevation="0"
-            text
-            color="yellow"
-          >
-            Ajouté aux favoris 💫
-          </v-snackbar>
-          <!-- - - - - - - - - - - The favorite star icon  &  the fired notification -->
+          <FavoriteIconBtn :astralBodyId="anAstralBody.id" />
         </v-row>
 
         <v-row id="" class="mx-2" no-gutters>
@@ -151,8 +124,6 @@ export default {
       filterByType: "none",
       filterHasMoons: false,
       filterFavorites: false,
-
-      snackbarModel: false,
     };
   },
   computed: {
@@ -255,5 +226,13 @@ export default {
 .theme--dark.v-list {
   background: rgb(30 30 30 / 95%);
   color: #ffffff;
+}
+
+.tooltip {
+  font-family: "Roboto", sans-serif;
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 8px 8px 8px 8px;
+  margin: 4px 0px 4px 0px;
+  border-radius: 10px;
 }
 </style>
