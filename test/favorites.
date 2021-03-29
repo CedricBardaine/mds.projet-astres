@@ -1,0 +1,25 @@
+// import _ from "lodash"
+// import Vuex from "vuex"
+// import { createLocalVue } from "@vue/test-utils"
+// describe("store/games/games", () => {
+//   const localVue = createLocalVue()
+//   localVue.use(Vuex)
+//   let NuxtStore
+//   let store
+
+//   beforeAll(async () => {
+//     const storePath = `~store/favorites.js`
+//     NuxtStore = await import(storePath)
+//   })
+
+//   beforeEach(async () => {
+//     store = await NuxtStore.createStore()
+//   })
+
+//     test('add to store'), () => {
+//         store.add("La Terre") ; 
+
+//         expect(store.state[0]).toEqual("La Terre"); 
+//     }
+
+// })

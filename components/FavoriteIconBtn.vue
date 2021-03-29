@@ -28,6 +28,7 @@
  * When a favorite is added, a notification is fired.
  */
 export default {
+  name: 'FavoriteIconBtn',
   props: {
     astralBodyId: String,
   },
