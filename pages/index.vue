@@ -77,35 +77,7 @@
             </small>
           </v-row>
 
-          <!-- The favorite star icon  &  the fired notification - - - - - - - - - - -->
-          <v-row no-gutters style="display: contents">
-            <v-icon
-              class="ma-4 mr-4 linkHover"
-              @click="
-                /* Fires a notification */
-                $store.state.favorites.includes(anAstralBody.id)
-                  ? ''
-                  : (snackbarModel = true);
-
-                /* Modify favorites list */
-                $store.commit('favorites/toggle', anAstralBody.id);
-              "
-              :color="
-                $store.state.favorites.includes(anAstralBody.id) ? 'yellow' : ''
-              "
-              >mdi-star</v-icon
-            >
-          </v-row>
-          <v-snackbar
-            v-model="snackbarModel"
-            right
-            elevation="0"
-            text
-            color="yellow"
-          >
-            Ajouté aux favoris 💫
-          </v-snackbar>
-          <!-- - - - - - - - - - - The favorite star icon  &  the fired notification -->
+          <FavoriteIconBtn :astralBodyId="anAstralBody.id" />
         </v-row>
 
         <v-row id="" class="mx-2" no-gutters>
@@ -151,8 +123,6 @@ export default {
       filterByType: "none",
       filterHasMoons: false,
       filterFavorites: false,
-
-      snackbarModel: false,
     };
   },
   computed: {
