@@ -33,6 +33,7 @@
       <v-icon
         :color="filterFavorites ? 'primary' : ''"
         @click="filterFavorites = !filterFavorites"
+        v-tooltip="'Filtrer par favoris'"
         >mdi-star</v-icon
       >
     </v-row>
@@ -225,5 +226,13 @@ export default {
 .theme--dark.v-list {
   background: rgb(30 30 30 / 95%);
   color: #ffffff;
+}
+
+.tooltip {
+  font-family: "Roboto", sans-serif;
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 8px 8px 8px 8px;
+  margin: 4px 0px 4px 0px;
+  border-radius: 10px;
 }
 </style>
