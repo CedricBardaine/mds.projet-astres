@@ -24,9 +24,13 @@ Il n’est pas attendu de réaliser une application backend.
   --> les favoris sont affichés sur la même page. 
 
 
-## Run on localhost 
+## Run app on localhost 
 
 `npm i && npm run dev` 
+
+## Run tests
+
+`npm run test` 
 
 <br>
 
